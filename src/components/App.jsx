@@ -37,7 +37,7 @@ function App() {
     auth
       .authorize(username, password)
       .then((data) => {
-        if (jwt) {
+        if (data.jwt) {
           setUserData(data.user);
           setIsLoggedIn(true);
           navigate("/ducks");
