@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Ducks from "./Ducks";
 import Login from "./Login";
@@ -9,6 +9,7 @@ import * as auth from "../utils/auth";
 import "./styles/App.css";
 
 function App() {
+  const [userData, setUserData] = useState({ username: "", email: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleRegistration = ({
@@ -21,10 +22,26 @@ function App() {
       auth
         .register(username, password, email)
         .then(() => {
-          //handleregistration
+          Navigate("./login");
         })
         .catch(console.error);
     }
+  };
+
+  const handleLogin = ({ username, password }) => {
+    if (!username || !password) {
+      return;
+    }
+    auth
+      .authorize(username, password)
+      .then((data) => {
+        if (jwt) {
+          setUserData(data.user);
+          setIsLoggedIn(true);
+          Navigate("/ducks");
+        }
+      })
+      .catch(console.error);
   };
 
   return (
@@ -49,7 +66,7 @@ function App() {
         path="/login"
         element={
           <div className="loginContainer">
-            <Login />
+            <Login handleLogin={handleLogin} />
           </div>
         }
       />
