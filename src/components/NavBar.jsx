@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeToken } from "../utils/token";
+import AppContext from "../contexts/AppContext";
 import Logo from "./Logo";
 import "./styles/NavBar.css";
 

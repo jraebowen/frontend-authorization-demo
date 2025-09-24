@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import AppContext from "../contexts/AppContext";
 
 function ProtectedRoute({ children, anonymous = false }) {
   const location = useLocation();
