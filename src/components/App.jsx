@@ -12,6 +12,8 @@ function App() {
   const [userData, setUserData] = useState({ username: "", email: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleRegistration = ({
     username,
     email,
@@ -38,7 +40,7 @@ function App() {
         if (jwt) {
           setUserData(data.user);
           setIsLoggedIn(true);
-          Navigate("/ducks");
+          navigate("/ducks");
         }
       })
       .catch(console.error);
