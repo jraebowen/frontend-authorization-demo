@@ -1,8 +1,10 @@
 import { Navigate, useLocation } from "react-router-dom";
 
-function ProtectedRoute({ isLoggedIn, children, anonymous = false }) {
+function ProtectedRoute({ children, anonymous = false }) {
   const location = useLocation();
   const from = location.state?.from || "/";
+
+  const { isLoggedIn } = useContext(AppContext);
 
   if (isLoggedIn && anonymous) {
     return <Navigate to={from} />;
