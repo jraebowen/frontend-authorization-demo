@@ -5,10 +5,28 @@ import Login from "./Login";
 import MyProfile from "./MyProfile";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
+import * as auth from "../utils/auth";
 import "./styles/App.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleRegistration = ({
+    username,
+    email,
+    password,
+    confirmPassword,
+  }) => {
+    if (password === confirmPassword) {
+      auth
+        .register(username, password, email)
+        .then(() => {
+          //handleregistration
+        })
+        .catch(console.error);
+    }
+  };
+
   return (
     <Routes>
       <Route
@@ -39,7 +57,7 @@ function App() {
         path="/register"
         element={
           <div className="registerContainer">
-            <Register />
+            <Register handleRegistration={handleRegistration} />
           </div>
         }
       />
